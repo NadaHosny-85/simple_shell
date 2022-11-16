@@ -53,7 +53,7 @@ char *_strtok(char *str, const char *delim, char **backup)
 		}
 		break;
 	}
-	returned_str = str;
+	(returned_str = str);
 	while (1)
 	{
 		if (is_delim(delim, *str))
