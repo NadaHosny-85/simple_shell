@@ -1,5 +1,5 @@
-#ifndef SIMPLE_SHELL_HEADER
-#define SIMPLE_SHELL_HEADER
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <unistd.h>
 #include <stdlib.h>
