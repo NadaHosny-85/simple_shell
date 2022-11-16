@@ -10,6 +10,7 @@
 int is_delim(const char *delims, char str)
 {
 	int i;
+
 	for (i = 0; delims[i]; i++)
 	{
 		if (str == *((char *)delims + i))
@@ -23,6 +24,8 @@ int is_delim(const char *delims, char str)
  * takes delim string as seperator between words
  * @str: current string to extract tokens from
  * @delim: seperator between each word of the string
+ * @backup: string that save the value of the remaing string
+ * after delimeter
  * Return: the current string that has delim after it
  */
 
@@ -30,13 +33,11 @@ char *_strtok(char *str, const char *delim, char **backup)
 {
 	if (str == NULL)
 		str = *backup;
-
 	if (*str == '\0')
 	{
 		*backup = str;
-		return NULL;
+		return (NULL);
 	}
-
 	while (1)
 	{
 		if (is_delim(delim, *str))
@@ -59,15 +60,15 @@ char *_strtok(char *str, const char *delim, char **backup)
 		{
 			*backup = str + 1;
 			*str = '\0';
-			return returned_str;
+			return (returned_str);
 		}
 		if (*str == '\0')
 		{
 			*backup = str;
-			return returned_str;
+			return (returned_str);
 		}
 		str++;
 	}
 
-	return str;
+	return (str);
 }

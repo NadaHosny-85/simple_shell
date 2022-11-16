@@ -17,7 +17,8 @@ size_t _getline(char **buffer, size_t *len, FILE *stream)
 	if (*buffer == NULL && *len == 0)
 	{
 		*len = BUFSIZ;
-		if ((*buffer = malloc(*len)) == NULL)
+		*buffer = malloc(*len);
+		if (*buffer == NULL)
 			return (-1);
 	}
 
