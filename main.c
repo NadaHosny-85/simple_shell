@@ -9,7 +9,7 @@
  * Return: 0 on success, 1 otherwise
  */
 
-int main(ac, *av[])
+int main(ac, **av)
 {
 	int shell_interactivity;
 	char *str = NULL;
