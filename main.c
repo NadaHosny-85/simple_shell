@@ -17,7 +17,7 @@ int main(ac, *av[])
 	int i = 0;
 	char **args;
 
-	av(void);
+	(void)av;
 
 	signal(SIGINT, SIG_IGN);
 	shell_interactivity = isatty(STDIN_FILENO);
