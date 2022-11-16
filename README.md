@@ -29,4 +29,4 @@ gcc *.c -o shell -Wall -Werror -Wextra -pedantic -std=gnu89
 ## Authors
 
 Ammar Massoud <ammarmohamedthez@gmail.com>
-Nade Hosny <nadahosni96@gmail.com>
+Nada Hosny <nadahosni96@gmail.com>
