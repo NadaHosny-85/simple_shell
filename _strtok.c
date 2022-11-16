@@ -31,6 +31,8 @@ int is_delim(const char *delims, char str)
 
 char *_strtok(char *str, const char *delim, char **backup)
 {
+	char *returned_str;
+
 	if (str == NULL)
 		str = *backup;
 	if (*str == '\0')
@@ -51,9 +53,7 @@ char *_strtok(char *str, const char *delim, char **backup)
 		}
 		break;
 	}
-
-	char *returned_str = str;
-
+	returned_str = str;
 	while (1)
 	{
 		if (is_delim(delim, *str))
