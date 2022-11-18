@@ -11,17 +11,17 @@
  */
 char **toklist(char *command, char *delim)
 {
-	char **argv = NULL;
 
 	int count = 0;
-
+	char **argv = NULL;
 	char *bstr = NULL;
+	char *token = NULL;
 
-	char *token = _strtok(command, delim, &bstr);
+	token = _strtok(command, delim, &bstr);
 
 	while (token != NULL)
 	{
-		argv = _realloc((*argv) * (count), sizeof(*argv) * (count + 1));
+		argv = _realloc(argv, sizeof(*argv) * (count), sizeof(*argv) * (count + 1));
 		if (argv == NULL)
 		{
 			perror("Error: Allocation Error\n");
@@ -33,5 +33,6 @@ char **toklist(char *command, char *delim)
 	}
 	argv = _realloc(argv, sizeof(*argv) * (count), sizeof(*argv) * (count + 1));
 	argv[count] = NULL;
+
 	return (argv);
 }
