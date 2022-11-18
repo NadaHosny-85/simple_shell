@@ -9,22 +9,25 @@
 int _executer(char **args)
 {
 	pid_t process;
-	int status = 0;
+	int status;
 
 	process = fork();
+
+	if (args == NULL)
+		return (-1);
 
 	if (process == -1)
 	{
 		perror("Error: Failed to Create Process");
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	if (process == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(args[0], args, NULL) < 0)
 		{
 			perror("Error: Falied to execute commands");
+			exit(-1);
 		}
-		exit(EXIT_FAILURE);
 	}
 	if (process > 0)
 	{
