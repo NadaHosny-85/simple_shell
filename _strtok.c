@@ -1,25 +1,6 @@
 #include "main.h"
 
 /**
- * is_delim - check if string has any of charchters of the delims string
- * @delims: array of chars as string delimeters
- * @str: current string char
- * Return: 1 if any of chars in delims is equal to str char
- */
-
-int is_delim(const char *delims, char str)
-{
-	int i;
-
-	for (i = 0; delims[i]; i++)
-	{
-		if (str == *((char *)delims + i))
-			return (1);
-	}
-	return (0);
-}
-
-/**
  * _strtok - loop through string and extract every word on it
  * takes delim string as seperator between words
  * @str: current string to extract tokens from
@@ -29,7 +10,7 @@ int is_delim(const char *delims, char str)
  * Return: the current string that has delim after it
  */
 
-char *_strtok(char *str, const char *delim, char **backup)
+char *_strtok(char *str, char *delim, char **backup)
 {
 	char *returned_str;
 
@@ -40,35 +21,47 @@ char *_strtok(char *str, const char *delim, char **backup)
 		*backup = str;
 		return (NULL);
 	}
-	while (1)
+
+	str += _strspn(str, delim);
+
+	if (*str == '\0')
 	{
-		if (is_delim(delim, *str))
-		{
-			str++;
-			continue;
-		}
-		if (*str == '\0')
-		{
-			return (NULL);
-		}
-		break;
-	}
-	(returned_str = str);
-	while (1)
-	{
-		if (is_delim(delim, *str))
-		{
-			*backup = str + 1;
-			*str = '\0';
-			return (returned_str);
-		}
-		if (*str == '\0')
-		{
-			*backup = str;
-			return (returned_str);
-		}
-		str++;
+		*backup = str;
+		return (NULL);
 	}
 
+	returned_str = str + _strcspn(str, delim);
+
+	if (*returned_str == '\0')
+	{
+		*backup = returned_str;
+		return (str);
+	}
+
+	*returned_str = '\0';
+	*backup = returned_str + 1;
 	return (str);
+}
+
+/**
+ * _strcspn - get the number of chars in s1 that doesn't found in s2
+ * @s1: string to get its chars
+ * @s2: delimeters chars to stop counting at
+ * Return: number of chars that are not in s2
+ */
+
+int _strcspn(char *s1, char *s2)
+{
+	int i = 0;
+	int len = 0;
+
+	while (s1[i] != '\0')
+	{
+		if (_strchr(s2, s1[i]) != NULL)
+			break;
+		i++;
+		len++;
+	}
+
+	return (len);
 }
