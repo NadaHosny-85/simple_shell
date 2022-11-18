@@ -9,7 +9,7 @@
  * Return: 0 on success, 1 otherwise
  */
 
-int main(int ac, __attribute__((unused)) char *av[])
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 {
 	char **argv = NULL;
 	char *command = NULL;
