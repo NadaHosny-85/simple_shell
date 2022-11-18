@@ -9,45 +9,39 @@
  * Return: 0 on success, 1 otherwise
  */
 
-int main(ac, **av)
+int main(int ac, __attribute__((unused)) char *av[])
 {
-	int shell_interactivity;
-	char *str = NULL;
-	size_t len = 0;
+	char **argv = NULL;
+	char *command = NULL;
 	int i = 0;
-	char **args;
-
-	(void)av;
+	size_t len = 0;
+	char *delim = " ;";
+	int shell_interactive = 0;
 
 	signal(SIGINT, SIG_IGN);
-	shell_interactivity = isatty(STDIN_FILENO);
-	if (shell_interactivity == 0 && ac == 1)
+	shell_interactive = isatty(STDIN_FILENO);
+	if (shell_interactive == 0)
 	{
-		i = _getline(&str, &len, stdin);
-		while (i > 0)
+		i = _getline(&command, &len, stdin);
+		while (i != EOF)
 		{
-			char **args = toklist(str, " ");
-
-			_executer(args);
-			str = NULL;
+			argv = toklist(command, delim);
+			_executer(argv);
+			command = NULL;
 		}
-		free(str);
+		free(command);
 		return (0);
 	}
-	while (shell_interactivity)
+	while (i != EOF && shell_interactive)
 	{
 		write(1, "($) ", 4);
-		i = _getline(&str, &len, stdin);
-		while (i < 0)
-		{
-			free(str);
-			write(1, "\n", 1);
-			break;
-		}
-		char **args = toklist(str, " ");
-
-		_executer(args);
-		str = NULL;
+		i = _getline(&command, &len, stdin);
+		if (i == EOF)
+			exit(0);
+		argv = toklist(command, delim);
+		_executer(argv);
+		free(command);
 	}
+
 	return (0);
 }
