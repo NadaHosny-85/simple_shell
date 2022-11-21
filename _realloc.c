@@ -18,7 +18,7 @@ void *_realloc(void *ptr, unsigned int cursize, unsigned int newsize)
 
 	unsigned int i;
 
-	unsigned int min = cursize > newsize ? cursize : newsize;
+	unsigned int min = cursize > newsize ? newsize : cursize;
 
 	if (newsize == cursize)
 	{
@@ -37,6 +37,7 @@ void *_realloc(void *ptr, unsigned int cursize, unsigned int newsize)
 	tempptr = malloc(newsize);
 	if (tempptr == NULL)
 	{
+		free(tempptr);
 		return (NULL);
 	}
 	for (i = 0; i < min; i++)

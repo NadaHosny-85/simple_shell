@@ -15,6 +15,7 @@ int _executer(char **args);
 int is_delim(const char *delims, char str);
 char *_strtok(char *str, char *delim, char **backup);
 void *_realloc(void *ptr, unsigned int cursize, unsigned int newsize);
+void free_tokens(char ***tokens);
 
 int _strlen(char *str);
 char *_strcat(char *dest, char *src);

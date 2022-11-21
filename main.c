@@ -9,7 +9,7 @@
  * Return: 0 on success, 1 otherwise
  */
 
-int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
+int main(int ac, __attribute__((unused)) char *av[])
 {
 	char **argv = NULL;
 	char *command = NULL;
@@ -17,19 +17,21 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 	size_t len = 0;
 	char *delim = " ;";
 	int shell_interactive = 0;
+	int idx = 0;
 
 	signal(SIGINT, SIG_IGN);
 	shell_interactive = isatty(STDIN_FILENO);
 	if (shell_interactive == 0)
 	{
 		i = _getline(&command, &len, stdin);
-		while (i != EOF)
+		if (i != EOF)
 		{
 			argv = toklist(command, delim);
 			_executer(argv);
 			command = NULL;
 		}
-		free(command);
+		free(argv[0]);
+		free(argv);
 		return (0);
 	}
 	while (i != EOF && shell_interactive)
@@ -37,10 +39,14 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 		write(1, "($) ", 4);
 		i = _getline(&command, &len, stdin);
 		if (i == EOF)
+		{
+			write(STDOUT_FILENO, "\n", 1);
 			exit(0);
+		}
 		argv = toklist(command, delim);
 		_executer(argv);
-		free(command);
+		free(argv[0]);
+		free(argv);
 	}
 
 	return (0);
