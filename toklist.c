@@ -13,7 +13,6 @@ char **toklist(char *command, char *delim)
 {
 	int count = 0;
 	char **argv = NULL;
-	// char *bstr = NULL;
 	char *token = NULL;
 
 	token = strtok(command, delim);
@@ -30,7 +29,6 @@ char **toklist(char *command, char *delim)
 		token = strtok(NULL, delim);
 		count++;
 	}
-	// free(command);
 	free(token);
 	argv = _realloc(argv, sizeof(*argv) * (count), sizeof(*argv) * (count + 1));
 	argv[count] = NULL;

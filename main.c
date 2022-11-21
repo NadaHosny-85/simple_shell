@@ -9,7 +9,7 @@
  * Return: 0 on success, 1 otherwise
  */
 
-int main(int ac, __attribute__((unused)) char *av[])
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 {
 	char **argv = NULL;
 	char *command = NULL;
@@ -17,7 +17,6 @@ int main(int ac, __attribute__((unused)) char *av[])
 	size_t len = 0;
 	char *delim = " ;";
 	int shell_interactive = 0;
-	int idx = 0;
 
 	signal(SIGINT, SIG_IGN);
 	shell_interactive = isatty(STDIN_FILENO);
