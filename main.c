@@ -11,26 +11,37 @@
 
 int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 {
+	char **commands = NULL;
 	char **argv = NULL;
 	char *command = NULL;
 	int i = 0;
 	size_t len = 0;
 	char *delim = " ;";
 	int shell_interactive = 0;
+	int j;
 
 	signal(SIGINT, SIG_IGN);
 	shell_interactive = isatty(STDIN_FILENO);
 	if (shell_interactive == 0)
 	{
-		i = _getline(&command, &len, stdin);
-		if (i != EOF)
+		while ((i = getline(&command, &len, stdin)) != -1)
 		{
-			argv = toklist(command, delim);
-			_executer(argv);
-			command = NULL;
+			rmnewl(command);
+			commands = toklist(command, "\n");
+			for (j = 0; commands[j] != NULL; j++)
+			{
+				printf("%s\n", commands[j]);
+				argv = toklist(commands[j], delim);
+				if (argv[0] == NULL)
+				{
+					free(argv);
+					break;
+				}
+				_executer(argv);
+			}
+			free(argv);
 		}
-		free(argv[0]);
-		free(argv);
+		free(commands);
 		return (0);
 	}
 	while (i != EOF && shell_interactive)

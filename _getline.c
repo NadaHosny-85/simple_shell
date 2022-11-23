@@ -41,3 +41,25 @@ size_t _getline(char **buffer, size_t *len, FILE *stream)
 		*ptr++ = c;
 	}
 }
+
+/**
+ * rmnewl - remove newline charchter from a given string
+ * @str: string to remove newline chars from
+ * Return: string after newline been removed
+ */
+void rmnewl(char *str)
+{
+	int idx = 0;
+
+	if (str == NULL)
+		return;
+
+	while (str[idx] != '\0')
+	{
+		if (str[idx] == '\n')
+			break;
+		idx++;
+	}
+
+	str[idx] = '\0';
+}

@@ -9,6 +9,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **commands;
+
 size_t _getline(char **buffer, size_t *len, FILE *stream);
 char **toklist(char *command, char *delim);
 int _executer(char **args);
@@ -23,5 +25,6 @@ void _strcpy(char *src, char *dest);
 int _strspn(char *s1, char *s2);
 char *_strchr(char *str, char c);
 int _strcspn(char *s1, char *s2);
+void rmnewl(char *str);
 
 #endif
