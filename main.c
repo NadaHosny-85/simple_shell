@@ -38,6 +38,7 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 				}
 				_executer(argv);
 			}
+			free(argv[0]);
 			free(argv);
 		}
 		free(commands);
