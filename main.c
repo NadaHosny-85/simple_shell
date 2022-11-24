@@ -30,7 +30,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char *av[])
 			commands = toklist(command, "\n");
 			for (j = 0; commands[j] != NULL; j++)
 			{
-				printf("%s\n", commands[j]);
 				argv = toklist(commands[j], delim);
 				if (argv[0] == NULL)
 				{
