@@ -23,6 +23,7 @@ char **toklist(char *command, char *delim)
 		argv = _realloc(argv, sizeof(*argv) * (count), sizeof(*argv) * (count + 1));
 		if (argv == NULL)
 		{
+			free(argv);
 			perror("Error: Allocation Error\n");
 			exit(EXIT_FAILURE);
 		}
