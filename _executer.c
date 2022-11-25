@@ -32,6 +32,7 @@ int _executer(char **args)
 	if (process > 0)
 	{
 		wait(&status);
+		free(args);
 	}
 	return (1);
 }
