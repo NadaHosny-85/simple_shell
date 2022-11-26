@@ -14,9 +14,8 @@ char **toklist(char *command, char *delim)
 	int count = 0;
 	char **argv = NULL;
 	char *token = NULL;
-	char *backstr = NULL;
 
-	token = _strtok(command, delim, &backstr);
+	token = strtok(command, delim);
 
 	while (token != NULL)
 	{
@@ -28,7 +27,7 @@ char **toklist(char *command, char *delim)
 			exit(EXIT_FAILURE);
 		}
 		argv[count] = token;
-		token = _strtok(NULL, delim, &backstr);
+		token = strtok(NULL, delim);
 		count++;
 	}
 	argv = _realloc(argv, sizeof(*argv) * (count), sizeof(*argv) * (count + 1));
